@@ -21,7 +21,7 @@ ENV S6_BEHAVIOUR_IF_STAGE2_FAILS=2 \
 
 RUN apt-get update \
   && apt-get install -y --no-install-recommends \
-  samba \
+  openssh-server \
   libnss-ldapd \
   wget \
   && ARCH="$(uname -m)" \
@@ -37,7 +37,6 @@ RUN apt-get update \
   && apt-get remove --purge -y wget \
   && apt-get --purge -y autoremove \
   && rm -rf "/var/lib/apt/lists/*" \
-  && rm "${SAMBA_CONFIG}" \
   && rm "${NSLCD_CONFIG}"
 
 COPY rootfs/ /

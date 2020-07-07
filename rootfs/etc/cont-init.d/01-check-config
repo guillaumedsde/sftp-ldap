@@ -1,0 +1,8 @@
+#!/usr/bin/with-contenv sh
+
+if [ -f "${NSLCD_CONFIG}" ]; then
+    echo "INFO: found nslcd config in ${NSLCD_CONFIG}"
+else
+    echo "ERROR: nslcd config not found in ${NSLCD_CONFIG}"
+    exit 1
+fi
