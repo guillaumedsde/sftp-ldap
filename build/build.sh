@@ -1,12 +1,12 @@
 #!/bin/sh
 
 if [ "${CI_COMMIT_REF_NAME}" = "master" ]; then
-    TAGS=" -t ${CI_REGISTRY_USER}/samba-ldap:latest "
+    TAGS=" -t ${CI_REGISTRY_USER}/sftp-ldap:latest "
 else
     # cleanup branch name
     BRANCH="$(echo "${CI_COMMIT_REF_NAME}" | tr / _)"
     # tag image with branch name
-    TAGS="-t ${CI_REGISTRY_USER}/samba-ldap:${BRANCH}"
+    TAGS="-t ${CI_REGISTRY_USER}/sftp-ldap:${BRANCH}"
 fi
 
 docker buildx build . \
