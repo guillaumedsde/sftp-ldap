@@ -1,6 +1,5 @@
 #!/usr/bin/with-contenv sh
 
-OPTS=""
 if [ ! -z "${DEBUG}" ]; then
     OPTS="-ddd"
 fi

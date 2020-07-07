@@ -2,7 +2,6 @@
 
 nslcd --version
 
-OPTS=""
 if [ ! -z "${DEBUG}" ]; then
     OPTS="--debug"
 fi
