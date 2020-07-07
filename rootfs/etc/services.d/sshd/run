@@ -1,7 +1,7 @@
 #!/usr/bin/with-contenv sh
 
 if [ ! -z "${DEBUG}" ]; then
-    OPTS="-ddd"
+    OPTS="${OPTS:-} -ddd"
 fi
 
 exec /usr/sbin/sshd -i -p 22 ${OPTS:-}

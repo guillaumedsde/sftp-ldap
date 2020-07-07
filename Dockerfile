@@ -24,6 +24,7 @@ RUN apt-get update \
   openssh-server \
   libnss-ldapd \
   wget \
+  debconf-utils \
   && ARCH="$(uname -m)" \
   && if [ "${ARCH}" = "x86_64" ]; then S6_ARCH=amd64; \
   elif [ "${ARCH}" = "i386" ]; then S6_ARCH=X86; \
@@ -33,11 +34,16 @@ RUN apt-get update \
   && echo using architecture "${S6_ARCH}" for S6 Overlay \
   && wget -O "s6.tgz" "https://github.com/just-containers/s6-overlay/releases/download/${S6_VERSION}/s6-overlay-${S6_ARCH}.tar.gz" \
   && tar xzf "s6.tgz" -C / \ 
+  && echo libnss-ldapd libnss-ldapd/nsswitch multiselect passwd, group, shadow | debconf-set-selections -v \
+  && echo libnss-ldapd libnss-ldapd/clean_nsswitch boolean true | debconf-set-selections -v \
+  && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libnss-ldapd \
+  && echo libpam-runtime libpam-runtime/profiles multiselect ldap | debconf-set-selections -v \
+  && DEBIAN_FRONTEND=noninteractive dpkg-reconfigure libpam-runtime \
   && rm "s6.tgz" \
-  && apt-get remove --purge -y wget \
+  && apt-get remove --purge -y wget debconf-utils \
   && apt-get --purge -y autoremove \
   && rm -rf "/var/lib/apt/lists/*" \
-  && rm "${NSLCD_CONFIG}"
+  && rm "${NSLCD_CONFIG}" 
 
 COPY rootfs/ /
 
