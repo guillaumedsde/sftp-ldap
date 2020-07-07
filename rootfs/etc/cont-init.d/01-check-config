@@ -6,3 +6,5 @@ else
     echo "ERROR: nslcd config not found in ${NSLCD_CONFIG}"
     exit 1
 fi
+
+mkdir -p /run/sshd
