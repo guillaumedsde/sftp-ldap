@@ -6,4 +6,4 @@ if [ ! -z "${DEBUG}" ]; then
     OPTS="--debug"
 fi
 
-exec nslcd --nofork "${OPTS}"
+exec nslcd --nofork ${OPTS:-}

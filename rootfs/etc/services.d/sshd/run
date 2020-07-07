@@ -4,4 +4,4 @@ if [ ! -z "${DEBUG}" ]; then
     OPTS="-ddd"
 fi
 
-exec /usr/sbin/sshd -i -p 22 "${OPTS}"
+exec /usr/sbin/sshd -i -p 22 ${OPTS:-}
